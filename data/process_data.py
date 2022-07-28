@@ -6,6 +6,15 @@ def load_data(messages_filepath, categories_filepath):
     m = pd.read_csv(messages_filepath)
     c = pd.read_csv(categories_filepath)
     df = pd.merge(m,c)
+    #splits the categories column into separate
+    df = df['categories'].str.split(';', expand = True)
+    print(df.head(10))
+    #clearly named columns
+    df.columns = df.iloc[0,:].apply(lambda x:x[:-2])
+    #converts values to binary
+    for c in df:
+        df[c] = df[c].str[-1].astype(int)
+    print(df.columns)
     return df
 
 
