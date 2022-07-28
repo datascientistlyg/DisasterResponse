@@ -17,7 +17,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn import svm
-#from lightgbm import LGBMClassifier
+from lightgbm import LGBMClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.model_selection import train_test_split
 import re
@@ -45,17 +45,16 @@ def build_model():
     pipeline = Pipeline([
     ('vect', CountVectorizer(tokenizer=tokenize)),
     ('tfidf', TfidfTransformer()),
-    ('clf', MultiOutputClassifier(OneVsRestClassifier(LogisticRegression())))
+    ('clf', MultiOutputClassifier(OneVsRestClassifier(LGBMClassifier())))
     #('clf', MultiOutputClassifier(svm.SVC()))
     ])
 
     parameters = {
-        #'clf__estimator__n_estimators': [50],
-        #'clf__min_samples_split': [1,2,3],
+        #...
         
     }
 
-    cv = GridSearchCV(pipeline, param_grid = parameters, cv=5, verbose=3)
+    cv = GridSearchCV(pipeline, param_grid = parameters)
     return cv
 
 def evaluate_model(model, X_test, Y_test, category_names):
