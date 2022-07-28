@@ -45,7 +45,7 @@ def build_model():
     pipeline = Pipeline([
     ('vect', CountVectorizer(tokenizer=tokenize)),
     ('tfidf', TfidfTransformer()),
-    ('clf', MultiOutputClassifier(OneVsRestClassifier(LGBMClassifier())))
+    ('clf', MultiOutputClassifier(LGBMClassifier()))
     #('clf', MultiOutputClassifier(svm.SVC()))
     ])
 
