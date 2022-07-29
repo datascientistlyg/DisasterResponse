@@ -2,7 +2,7 @@
 ## Project Description:
 This project includes a web app where an emergency worker can input a new message and get classification results in several categories. The web app will also display visualizations of the data. 
 
-This application will greatly impact the community, and this application will help people or organization in an event of a disaster. This model could be used to classify messages and messages to be sent to the appropriate disaster relief agency.  
+This application will greatly impact the community, and this application will help people or organization in an event of a disaster. This model could be used to classify messages and messages could to be sent to the appropriate disaster relief agency.  
 
 ## File Description:
 1. models directory: train_classifier.py
