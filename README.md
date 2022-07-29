@@ -2,13 +2,29 @@
 ## Project Description:
 This project includes a web app where an emergency worker can input a new message and get classification results in several categories. The web app will also display visualizations of the data. 
 
-## Pre-Install:
-pip install lightgbm
-
 ## File Description:
 1. models directory: train_classifier.py
 2. data directory: process_data.py
 3. app directory: run.py
+
+## File Architecture:
+- app
+| - template
+| |- master.html  # main page of web app
+| |- go.html  # classification result page of web app
+|- run.py  # Flask file that runs app
+
+- data
+|- disaster_categories.csv  # data to process 
+|- disaster_messages.csv  # data to process
+|- process_data.py
+|- InsertDatabaseName.db   # database to save clean data to
+
+- models
+|- train_classifier.py
+|- classifier.pkl  # saved model 
+
+- README.md
 
 ## Run Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
