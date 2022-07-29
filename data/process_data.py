@@ -5,16 +5,16 @@ from sqlalchemy import create_engine
 def load_data(messages_filepath, categories_filepath):
     m = pd.read_csv(messages_filepath)
     c = pd.read_csv(categories_filepath)
+    #c = c['categories'].str.split(';', expand = True)
     df = pd.merge(m,c)
-    #splits the categories column into separate
-    df = df['categories'].str.split(';', expand = True)
-    print(df.head(10))
-    #clearly named columns
-    df.columns = df.iloc[0,:].apply(lambda x:x[:-2])
-    #converts values to binary
-    for c in df:
-        df[c] = df[c].str[-1].astype(int)
-    print(df.columns)
+    df_s = df['categories'].str.split(';', expand = True)
+    print(df_s.head(10))
+    df_s.columns = df_s.iloc[0,:].apply(lambda x:x[:-2])
+    for c in df_s:
+        df_s[c] = df_s[c].str[-1].astype(int)
+    print("-------")
+    print(df_s.columns)
+    df = pd.concat([df, df_s], axis=1).drop(columns=['categories'])
     return df
 
 
