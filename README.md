@@ -7,7 +7,7 @@ This project includes a web app where an emergency worker can input a new messag
 2. data directory: process_data.py
 3. app directory: run.py
 
-## File Architecture:
+## Project Architecture:
 - app
 
 | - template
