@@ -26,7 +26,7 @@ def clean_data(df):
 def save_data(df, database_filename):
     db_engine = create_engine('sqlite:///'+database_filename)
     conn = db_engine.connect()
-    df.to_sql('disaster', db_engine, index=False)
+    df.to_sql('disaster', db_engine, index=False, if_exists='replace')
     conn.close()
 
 
