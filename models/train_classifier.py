@@ -49,9 +49,9 @@ def build_model():
     #('clf', MultiOutputClassifier(svm.SVC()))
     ])
 
+    print(pipeline.get_params())
     parameters = {
-        #...
-        
+       'clf__estimator__learning_rate': (0.1, 0.3)  
     }
 
     cv = GridSearchCV(pipeline, param_grid = parameters)
