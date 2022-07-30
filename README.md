@@ -9,7 +9,7 @@ This application will greatly impact the community, and this application will he
 2. data directory: process_data.py
 3. app directory: run.py
 
-## Project Architecture:
+## Project architecture after execution:
 - app
 
 | - template
