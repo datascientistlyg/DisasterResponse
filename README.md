@@ -9,14 +9,8 @@ This application will greatly impact the community, and this application will he
 2. data directory: process_data.py
 3. app directory: run.py
 
-## Project architecture after execution:
+## File architecture:
 - app
-
-| - template
-
-| |- master.html  # main page of web app
-
-| |- go.html  # classification result page of web app
 
 |- run.py  # Flask file that runs app
 
@@ -28,14 +22,9 @@ This application will greatly impact the community, and this application will he
 
 |- process_data.py
 
-|- InsertDatabaseName.db   # database to save clean data to
-
 - models
 
 |- train_classifier.py
-
-|- classifier.pkl  # saved model 
-
 
 - README.md
 
