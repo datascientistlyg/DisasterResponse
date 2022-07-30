@@ -3,7 +3,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
-    """
+    '''
     Load data from csv files and merge into dataframe
     
     INPUTS:
@@ -11,7 +11,7 @@ def load_data(messages_filepath, categories_filepath):
         categories_filepath : categories file path
     RETURNS:
         df : merged dataframe
-    """
+    '''
     
     m = pd.read_csv(messages_filepath)
     c = pd.read_csv(categories_filepath)
@@ -29,28 +29,28 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
-    """
+    '''
     Clean the dataframe and drop the duplicates
     
     INPUTS:
         df : input dataframe
     RETURNS:
         df : cleaned dataframe
-    """
+    '''
     
     df = df.drop_duplicates()
     return df
 
 
 def save_data(df, database_filename):
-    """
+    '''
     Save the dataframe to database
     
     INPUTS:
         df : input dataframe
         database_filename : the database filename which the dataframe will be stored to 
 
-    """
+    '''
 
     db_engine = create_engine('sqlite:///'+database_filename)
     conn = db_engine.connect()
