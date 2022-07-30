@@ -22,6 +22,7 @@ def load_data(messages_filepath, categories_filepath):
     df_s.columns = df_s.iloc[0,:].apply(lambda x:x[:-2])
     for c in df_s:
         df_s[c] = df_s[c].str[-1].astype(int)
+    df_s = df_s.clip(0,1) #binary        
     print("-------")
     print(df_s.columns)
     df = pd.concat([df, df_s], axis=1).drop(columns=['categories'])
