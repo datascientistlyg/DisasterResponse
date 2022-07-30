@@ -23,6 +23,16 @@ from sklearn.model_selection import train_test_split
 import re
 
 def load_data(database_filepath):
+    '''
+    Loads the dataframe from the database and put it into feature X and label Y dataframes.
+    
+    INPUTS:
+        database_filepath : database file path
+    RETURNS:
+        X - message features
+        Y - labels
+        df.columns - all dataframe columns
+    '''
     engine = create_engine('sqlite:///' + str(database_filepath))
     df = pd.read_sql_table("disaster", con=engine)
     print(df.columns)
@@ -33,6 +43,14 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    '''
+    tokenize the text
+    
+    INPUTS:
+        text : text to be tokenized
+    RETURNS:
+        words: tokenized text
+    '''
     stop_words = stopwords.words()
     text = text.lower()
     text = re.sub(r"[^a-zA-Z0-9]"," ",text)
@@ -42,26 +60,50 @@ def tokenize(text):
 
 
 def build_model():
+    '''
+    Builds the model based on pipeline and grid search technique
+    
+    RETURNS:
+        cv : the model fitted by grid search
+    '''    
     pipeline = Pipeline([
     ('vect', CountVectorizer(tokenizer=tokenize)),
     ('tfidf', TfidfTransformer()),
-    ('clf', MultiOutputClassifier(LGBMClassifier()))
+    #('clf', MultiOutputClassifier(LGBMClassifier()))
     #('clf', MultiOutputClassifier(svm.SVC()))
+    ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
 
     print(pipeline.get_params())
     parameters = {
-       'clf__estimator__learning_rate': (0.1, 0.3)  
+       #'clf__estimator__learning_rate': (0.1, 0.3)  
+       'clf__estimator__n_estimators': (10, 30)
     }
 
     cv = GridSearchCV(pipeline, param_grid = parameters)
     return cv
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    '''
+    Evaluate model by classification_report.
+    
+    INPUTS:
+        model : the generated model
+        X_test : the features of the test data
+        Y_test : the labels of the data
+        category_names : the category names
+    '''
     print(classification_report(Y_test, model.predict(X_test)))
 
 
 def save_model(model, model_filepath):
+    '''
+    Save the model to model_filepath
+    
+    INPUTS:
+        model : the input model
+        model_filepath : the file path the model to be dumped
+    '''
     pickle.dump(model, open(model_filepath,'wb'))
 
 
